@@ -1,0 +1,65 @@
+# ================================
+# ASP.NET Core
+# ================================
+
+## Build artifacts
+**/bin/
+**/obj/
+
+## Rider project files
+.idea/
+
+## Visual Studio files
+.vs/
+*.csproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Sensitive config
+**/appsettings.json
+**/appsettings.*.json
+
+## Static assets (rebuilt by CI/CD or local build)
+**/wwwroot/
+
+
+
+# ================================
+# React (CRA, Vite, Next.js, etc.)
+# ================================
+
+# dependencies
+/client/node_modules/
+
+# build output
+/client/dist/
+/client/build/
+
+# Next.js
+.next/
+
+# Vite
+dist/
+
+# optional editor or OS junk
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+.DS_Store
+
+
+
+# ================================
+# Environment files
+# ================================
+
+.env*
+
+# ================================
+# React (CRA, Vite, Next.js, etc.)
+# ================================
+# dependencies
+/client/node_modules/
+

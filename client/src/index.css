@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@layer components {
+  .container-lg {
+    @apply max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+  }
+
+  .text-gradient {
+    @apply mt-10 text-4xl font-extrabold leading-tight bg-gradient-to-r from-fuchsia-500 via-rose-400 to-amber-300 bg-clip-text text-transparent;
+  }
+
+  .section-title {
+    @apply text-lg font-medium text-gray-400 uppercase tracking-wide inline-block border-gray-700 pb-1;
+  }
+
+  .movie-card {
+    @apply bg-gray-800/70 backdrop-blur-sm border border-gray-700 rounded-2xl p-4 w-full transition-colors duration-300;
+  }
+
+  .movie-card:hover {
+    @apply border-transparent ring-1 ring-pink-500 bg-gray-800/85;
+  }
+
+  .movie-card img {
+    @apply w-full h-auto rounded-xl object-cover;
+  }
+}
+
+/* Base theme */
+body {
+  @apply bg-white text-black;
+}
+
+.dark body {
+  @apply bg-gray-950 text-white;
+}

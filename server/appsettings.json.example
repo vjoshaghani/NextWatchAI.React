@@ -1,0 +1,13 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "<YOUR_CONNECTION_STRING_HERE>"
+  },
+  "OpenAI": { "ApiKey": "<YOUR_OPENAI_KEY>" },
+  "Jwt": {
+    "Key": "<YOUR_JWT_SECRET>",
+    "Issuer": "YourAppName",
+    "Audience": "YourAppNameUsers",
+    "ExpireMinutes": 1440
+  },
+  "Tmdb": { "ApiKey": "<YOUR_TMDB_KEY>", "BaseUrl": "https://api.themoviedb.org/3/" }
+}
