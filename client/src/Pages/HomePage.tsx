@@ -101,11 +101,9 @@ const HomePage: React.FC = () => {
           className="w-full h-full object-cover rounded-xl"
         />
         <div className="absolute inset-0 bg-black/30 rounded-xl pointer-events-none" />
-        <div className="absolute inset-0 flex flex-col justify-start items-center px-4 pt-[30%] sm:pt-[25%] md:pt-[20%]">
-          <h1 className="text-gradient text-[clamp(1.5rem,5vw,2.5rem)] font-bold drop-shadow-md mb-4">
-            Find the perfect film — for every mood
-          </h1>
-          <div className="w-full max-w-md">
+        <div className="absolute inset-0 px-4 flex justify-center items-end">
+          {/* Make the search bar sit 1.5rem from the bottom */}
+          <div className="w-full max-w-md mb-6">
             <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           </div>
         </div>

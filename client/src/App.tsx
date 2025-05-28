@@ -16,7 +16,7 @@ export default function App() {
       <LanguageProvider>
         <Router>
           <Navbar />
-          <main className="pt-20 container mx-auto">
+          <main className="pt-20 px-4 sm:px-6 lg:px-8 container mx-auto">
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
