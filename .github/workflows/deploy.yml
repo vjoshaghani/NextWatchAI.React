@@ -7,7 +7,7 @@ on:
 
 env:
   NODE_VERSION: 18.x
-  DOTNET_VERSION: 8.0.x
+  DOTNET_VERSION: 9.0.x
 
 jobs:
   build-and-deploy:
@@ -39,6 +39,7 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+          include-prerelease: true
 
       - name: Restore and publish backend
         working-directory: ./server
