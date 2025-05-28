@@ -45,13 +45,15 @@ function NoteField({
 }
 
 export const FavoritesPage: React.FC = () => {
-  const { token }           = useAuth();
+  const { token, loading }           = useAuth();
   const navigate            = useNavigate();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [notes, setNotes]   = useState<Record<number,string>>({});
 
   // 1) Load favorites & full TMDB details
   useEffect(() => {
+    if (loading) return;
+
     if (!token) {
       navigate("/login");
       return;
@@ -81,7 +83,7 @@ export const FavoritesPage: React.FC = () => {
       );
       setMovies(full);
     })();
-  }, [token, navigate]);
+  }, [token, loading, navigate]);
 
   // 2) Unfavorite
   const removeFavorite = async (id: number) => {
