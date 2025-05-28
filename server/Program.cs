@@ -67,7 +67,7 @@ builder.Services.AddCors(options =>
         policy => policy
             .WithOrigins(
                 "http://localhost:5173",
-                "nextwatch-ai-e5frangmf4ebcuc0.canadacentral-01.azurewebsites.net"
+                "http://nextwatch-ai-e5frangmf4ebcuc0.canadacentral-01.azurewebsites.net"
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
@@ -87,6 +87,7 @@ builder.Services
     {
         client.BaseAddress = new Uri(baseUrl);
         client.DefaultRequestHeaders.Add("Accept", "application/json");
+        client.DefaultRequestHeaders.Add("Authorization", $"Bearer {tmdbKey}");
     })
     // also register the key for injection
     .Services
@@ -103,6 +104,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseCors("AllowClient");
 
 app.UseAuthentication();
@@ -110,5 +114,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapFallbackToFile("index.html");
 
 app.Run();
