@@ -63,10 +63,15 @@ builder.Services.AddSingleton<IAiRecommendationService, GptRecommendationService
 // allow your React origin
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReactDev",
-        policy => policy.WithOrigins("http://localhost:5173")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod());
+    options.AddPolicy("AllowClient",
+        policy => policy
+            .WithOrigins(
+                "http://localhost:5173",
+                "nextwatch-ai-e5frangmf4ebcuc0.canadacentral-01.azurewebsites.net"
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+    );
 });
 
 // Program.cs
@@ -98,8 +103,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowReactDev");
-app.MapControllers();
+app.UseCors("AllowClient");
+
 app.UseAuthentication();
 
 app.UseAuthorization();

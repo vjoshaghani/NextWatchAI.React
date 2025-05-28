@@ -10,7 +10,7 @@ const AIChat = ({ onRecommend }: AIChatProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:5258/api/ai";
+  const baseUrl = "/api/ai";
 
   const askAI = async () => {
     if (!input.trim()) return;
