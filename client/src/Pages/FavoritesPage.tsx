@@ -69,12 +69,14 @@ export const FavoritesPage: React.FC = () => {
       setNotes(noteMap);
 
       // fetch TMDB details
-      const tmdbKey = import.meta.env.VITE_TMDB_API_KEY!;
       const full = await Promise.all(
         favs.map((f) =>
-          fetch(
-            `https://api.themoviedb.org/3/movie/${f.tmdbId}?api_key=${tmdbKey}`
-          ).then((r) => r.json() as Promise<Movie>)
+          fetch(`/api/tmdb/${f.tmdbId}`, {
+            headers: { Authorization: `Bearer ${token}` }
+          }).then(r => {
+            if (!r.ok) throw new Error(`tmdb ${r.status}`);
+            return r.json() as Promise<Movie>;
+          })
         )
       );
       setMovies(full);

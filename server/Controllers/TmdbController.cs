@@ -51,5 +51,17 @@ namespace server.Controllers
             var json = await res.Content.ReadAsStringAsync();
             return Content(json, "application/json");
         }
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var client = _http.CreateClient("tmdb");
+            var resp = await client.GetAsync($"movie/{id}?api_key={_apiKey}");
+            if (!resp.IsSuccessStatusCode)
+                return StatusCode((int)resp.StatusCode);
+
+            var json = await resp.Content.ReadAsStringAsync();
+            return Content(json, "application/json");
+        }
     }
 }
