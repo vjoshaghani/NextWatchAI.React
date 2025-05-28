@@ -1,0 +1,53 @@
+name: Build & deploy to Azure
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  NODE_VERSION: 18.x
+  DOTNET_VERSION: 8.0.x
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # 1. Build React
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install & build client
+        working-directory: ./client
+        run: |
+          npm ci
+          npm run build
+
+      - name: Copy client build into wwwroot
+        run: |
+          rm -rf ./server/wwwroot
+          mkdir -p ./server/wwwroot
+          cp -r ./client/dist/* ./server/wwwroot/
+
+      # 2. Build & publish .NET
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore and publish backend
+        working-directory: ./server
+        run: dotnet publish -c Release -o published
+
+      # 3. Deploy to Azure Web App
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: nextwatch-portfolio
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          package: ./server/published
