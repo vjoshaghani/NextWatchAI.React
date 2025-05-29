@@ -38,6 +38,13 @@ namespace server.Data
                     .HasForeignKey(f => f.MovieId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
+
+            modelBuilder.Entity<Movie>(entity =>
+            {
+                entity.HasIndex(m => m.TmdbId)
+                    .IsUnique()
+                    .HasDatabaseName("IX_Movies_TmdbId_Unique");
+            });
         }
     }
 }
