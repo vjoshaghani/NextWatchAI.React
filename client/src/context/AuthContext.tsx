@@ -26,6 +26,35 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoading(false);
   }, []);
 
+  useEffect(() => {
+    if (!token) return;
+
+    let timer: ReturnType<typeof setTimeout>;
+
+    try {
+      // decode the payload part of the JWT
+      const [, payloadB64] = token.split(".");
+      const { exp }       = JSON.parse(atob(payloadB64)) as { exp: number };
+      const msUntilExpiry = exp * 1000 - Date.now();
+
+      if (msUntilExpiry <= 0) {
+        // already expired
+        logout();
+      } else {
+        timer = setTimeout(() => {
+          logout();
+        }, msUntilExpiry);
+      }
+    } catch {
+      // if anything goes wrong decoding, just clear out
+      logout();
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [token]);
+
   const login = (t: string) => {
     localStorage.setItem("token", t);
     setToken(t);
