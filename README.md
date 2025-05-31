@@ -49,7 +49,7 @@ A modern movie recommendation app showcasing **advanced .NET** backend skills, A
 ## 🏁 Getting Started
 
 1. **Clone & configure**  
-git clone https://github.com/your-org/NextWatchAI.git
+git clone https://github.com/vjoshaghani/NextWatchAI.React.git  
 cd NextWatchAI/server
 
 # Set up secrets
