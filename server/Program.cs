@@ -12,7 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 // 1) EF + Identity
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 3,
+            maxRetryDelay: TimeSpan.FromSeconds(5),
+            errorNumbersToAdd: null)
     )
 );
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
@@ -67,7 +71,7 @@ builder.Services.AddCors(options =>
         policy => policy
             .WithOrigins(
                 "http://localhost:5173",
-                "http://nextwatch-ai-e5frangmf4ebcuc0.canadacentral-01.azurewebsites.net"
+                "https://nextwatch-ai-e5frangmf4ebcuc0.canadacentral-01.azurewebsites.net"
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
