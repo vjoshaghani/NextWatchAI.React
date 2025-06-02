@@ -14,8 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         sqlOptions => sqlOptions.EnableRetryOnFailure(
-            maxRetryCount: 3,
-            maxRetryDelay: TimeSpan.FromSeconds(5),
+            maxRetryCount: 5,
+            maxRetryDelay: TimeSpan.FromSeconds(10),
             errorNumbersToAdd: null)
     )
 );
@@ -51,7 +51,7 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = jwtSettings["Issuer"],
         ValidAudience = jwtSettings["Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(key),
-        ClockSkew = TimeSpan.Zero
+        ClockSkew = TimeSpan.FromMinutes(2)
     };
 });
 
@@ -70,11 +70,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowClient",
         policy => policy
             .WithOrigins(
-                "http://localhost:5173",
-                "https://nextwatch-ai-e5frangmf4ebcuc0.canadacentral-01.azurewebsites.net"
+                "http://localhost:5173"
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
+            .AllowCredentials()
     );
 });
 
@@ -96,6 +96,8 @@ builder.Services
     // also register the key for injection
     .Services
     .AddSingleton(sp => tmdbKey);
+
+builder.Services.AddHostedService<DatabaseWarmupService>();
 
 var app = builder.Build();
 
