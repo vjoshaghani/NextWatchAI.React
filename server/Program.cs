@@ -14,8 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         sqlOptions => sqlOptions.EnableRetryOnFailure(
-            maxRetryCount: 5,
-            maxRetryDelay: TimeSpan.FromSeconds(10),
+            maxRetryCount: 15,
+            maxRetryDelay: TimeSpan.FromSeconds(5),
             errorNumbersToAdd: null)
     )
 );
@@ -96,8 +96,6 @@ builder.Services
     // also register the key for injection
     .Services
     .AddSingleton(sp => tmdbKey);
-
-builder.Services.AddHostedService<DatabaseWarmupService>();
 
 var app = builder.Build();
 
