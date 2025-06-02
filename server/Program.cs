@@ -14,7 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"),
         sqlOptions => sqlOptions.EnableRetryOnFailure(
-            maxRetryCount: 15,
+            maxRetryCount: 20,
             maxRetryDelay: TimeSpan.FromSeconds(5),
             errorNumbersToAdd: null)
     )
@@ -65,18 +65,18 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IAiRecommendationService, GptRecommendationService>();
 // allow your React origin
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowClient",
-        policy => policy
-            .WithOrigins(
-                "http://localhost:5173"
-            )
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials()
-    );
-});
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("AllowClient",
+//         policy => policy
+//             .WithOrigins(
+//                 "http://localhost:5173"
+//             )
+//             .AllowAnyHeader()
+//             .AllowAnyMethod()
+//             .AllowCredentials()
+//     );
+// });
 
 // Program.cs
 

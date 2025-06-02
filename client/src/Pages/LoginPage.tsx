@@ -40,6 +40,11 @@ export function LoginPage() {
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-gray-800 text-white shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold mb-4">Sign In</h2>
+      {isSubmitting && (
+        <div className="mb-4 p-2 bg-yellow-600 text-yellow-100 rounded">
+          🔄 Waking up the server… this may take a few seconds.
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && <div className="text-red-500">{error}</div>}
         <div>
@@ -50,6 +55,7 @@ export function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             required
             className="w-full bg-gray-700 text-white border border-gray-600 rounded px-3 py-2 placeholder-gray-400"
+            disabled={ isSubmitting}
           />
         </div>
         <div>

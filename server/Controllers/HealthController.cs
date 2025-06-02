@@ -21,6 +21,7 @@ namespace server.Controllers
         }
 
         [HttpGet("keep-alive")]
+        [HttpHead("keep-alive")]    
         public async Task<IActionResult> KeepAlive()
         {
             try
