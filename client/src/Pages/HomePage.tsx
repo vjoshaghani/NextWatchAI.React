@@ -101,6 +101,18 @@ const HomePage: React.FC = () => {
           className="w-full h-full object-cover rounded-xl"
         />
         <div className="absolute inset-0 bg-black/30 rounded-xl pointer-events-none" />
+        <div className="absolute top-6 right-6 bg-gray-900/60 backdrop-blur-sm ring-1 ring-white/10 text-gray-200 text-sm md:text-base px-4 py-3 rounded-lg shadow-lg max-w-[90%] md:max-w-sm z-10 space-y-2 font-sans font-medium">
+          <p>
+            🎬 A smart movie app where you can discover great films, get AI suggestions, and save personal favorites with notes.
+          </p>
+          <ul className="space-y-1 list-none leading-snug">
+            <li>🔍 <span className="text-pink-400">Search</span> any movie by name</li>
+            <li>✨ <span className="text-yellow-300">AI suggestions</span> based on your mood</li>
+            <li>❤️ <span className="text-red-400">Click the heart</span> to save favorites</li>
+            <li>📝 <span className="text-blue-300">Leave notes</span> on saved movies</li>
+            <li>🔐 <span className="text-purple-300">Create an account</span> to unlock favorites</li>
+          </ul>
+        </div>
         <div className="absolute inset-0 px-4 flex justify-center items-end">
           {/* Make the search bar sit 1.5rem from the bottom */}
           <div className="w-full max-w-md mb-6">

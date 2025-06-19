@@ -41,9 +41,9 @@ const AIChat = ({ onRecommend }: AIChatProps) => {
   };
 
   return (
-    <div className="space-y-4 pt-4 pb-2 bg-gray-900 p-4 rounded-lg shadow-lg">
+    <div className="space-y-4 pt-8 pb-6 px-8 bg-gray-900 rounded-xl shadow-xl border border-gray-700 max-w-full md:max-w-3xl min-h-[320px] mx-auto">
       <input
-        className="w-full p-2 rounded-md bg-gray-800 text-white placeholder-gray-400 text-sm border border-gray-600 "
+        className="w-full p-3 rounded-md bg-gray-800 text-white placeholder-gray-400 text-base border border-gray-600"
         placeholder="Describe a mood…"
         value={input}
         onChange={(e) => setInput(e.target.value)}
@@ -53,7 +53,7 @@ const AIChat = ({ onRecommend }: AIChatProps) => {
       <button
         onClick={askAI}
         disabled={isLoading}
-        className="w-full bg-pink-600 hover:bg-pink-500 text-white py-1.5 rounded text-sm disabled:opacity-50"
+        className="w-full bg-pink-600 hover:bg-pink-500 text-white py-2.5 rounded text-base font-medium disabled:opacity-50"
       >
         {isLoading ? "Thinking…" : "Ask AI"}
       </button>
@@ -61,9 +61,9 @@ const AIChat = ({ onRecommend }: AIChatProps) => {
       {error && <p className="text-red-400 text-xs">{error}</p>}
 
       {response && (
-        <div className="text-white text-sm space-y-1">
+        <div className="text-white text-base space-y-2">
           <div className="flex items-center justify-between">
-            <p className="font-semibold text-pink-400">{response.title}</p>
+            <p className="font-semibold text-pink-400 text-lg">{response.title}</p>
             <button
               onClick={() => onRecommend(response.title)}
               className="text-gray-400 hover:text-white border border-gray-700 hover:border-pink-500 text-sm px-3 py-1.5 rounded-md transition-colors"
@@ -71,7 +71,7 @@ const AIChat = ({ onRecommend }: AIChatProps) => {
               Search
             </button>
           </div>
-          <p className="text-gray-300 text-xs">{response.reason}</p>
+          <p className="text-gray-300 text-sm leading-relaxed">{response.reason}</p>
         </div>
       )}
     </div>
