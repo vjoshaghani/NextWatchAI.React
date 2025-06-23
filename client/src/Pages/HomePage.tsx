@@ -101,7 +101,7 @@ const HomePage: React.FC = () => {
           className="w-full h-full object-cover rounded-xl"
         />
         <div className="absolute inset-0 bg-black/30 rounded-xl pointer-events-none" />
-        <div className="absolute top-6 right-6 bg-gray-900/60 backdrop-blur-sm ring-1 ring-white/10 text-gray-200 text-sm md:text-base px-4 py-3 rounded-lg shadow-lg max-w-[90%] md:max-w-sm z-10 space-y-2 font-sans font-medium">
+        <div className="hidden md:block absolute top-6 right-6 bg-gray-900/60 backdrop-blur-sm ring-1 ring-white/10 text-gray-200 text-sm md:text-base px-4 py-3 rounded-lg shadow-lg max-w-[90%] md:max-w-sm z-10 space-y-2 font-sans font-medium">
           <p>
             🎬 A smart movie app where you can discover great films, get AI suggestions, and save personal favorites with notes.
           </p>
